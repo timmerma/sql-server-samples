@@ -3,7 +3,13 @@
 # The *trigger* specifies what triggers this pipeline to run automatically. In this case: a *commit* against *master*
 trigger:
 - master
-
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    action: 'Create Or Update Resource Group'
+    templateLocation: 'Linked artifact'
+    deploymentMode: 'Incremental'
+appendCommitMessageToRunName:
 # The *pool* specifies which VM image to use for executing this pipeline.
 pool:
   name: Azure Pipelines
